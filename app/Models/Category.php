@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 class Category extends Model
 {
     protected $fillable = [
-        'name', 'order'
+        'name', 'order', 'slug'
     ];
-    
+
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
