@@ -19,4 +19,28 @@ class CategoryTest extends TestCase
 
         $this->assertInstanceOf(Category::class, $category->children()->first());
     }
+
+    public function test_it_can_fetch_only_parents()
+    {
+        $category = factory(Category::class)->create();
+
+        $category->children()->save(
+            factory(Category::class)->create()
+        );
+
+        $this->assertEquals(1, Category::parents()->count());
+    }
+
+    public function test_it_is_orderable_by_a_number_order()
+    {
+        $category = factory(Category::class)->create([
+            'order' => 1
+        ]);
+
+        $anotherCategory = factory(Category::class)->create([
+            'order' => 2
+        ]);
+
+        $this->assertEquals($anotherCategory->name, Category::ordered('desc')->first()->name);
+    }
 }
