@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Category;
+use App\Scoping\Scoper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -12,8 +13,8 @@ class Product extends Model
         return 'slug';
     }
 
-    public function categories()
+    public function scopeWithScopes(Builder $builder)
     {
-        return $this->belongsToMany(Category::class);
+        return new Scoper();
     }
 }
