@@ -2,7 +2,7 @@
 
 namespace App\Models\Traits;
 
-use App\Cart\Money;
+use Money\Money;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
@@ -12,11 +12,16 @@ trait HasPrice
 {
     public function getPriceAttribute($value)
     {
-        return new Money($value);
+        return new Money($value, new Currency('USD'));
     }
 
     public function getFormattedPriceAttribute()
     {
-        return $this->price->formatted();
+        $formatter = new IntlMoneyFormatter(
+            new NumberFormatter('en_US', NumberFormatter::CURRENCY),
+            new ISOCurrencies()
+        );
+
+        return $formatter->format($this->price);
     }
 }
