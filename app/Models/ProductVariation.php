@@ -21,6 +21,11 @@ class ProductVariation extends Model
         return new Money($value);
     }
 
+    public function priceVaries()
+    {
+        return $this->price->amount() !== $this->product->price->amount();
+    }
+
     public function type()
     {
         return $this->hasOne(ProductVariationType::class, 'id', 'product_variation_type_id');
