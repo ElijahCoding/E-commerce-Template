@@ -81,4 +81,35 @@ class ProductVariationTest extends TestCase
 
         $this->assertInstanceOf(Stock::class, $variation->stocks->first());
     }
+
+    public function test_it_has_stock_information()
+    {
+        $variation = factory(ProductVariation::class)->create();
+
+        $variation->stocks()->save(
+            factory(Stock::class)->make()
+        );
+
+        $this->assertInstanceOf(ProductVariation::class, $variation->stock->first());
+    }
+
+    public function test_it_has_stock_count_pivot_within_stock_information()
+    {
+
+    }
+
+    public function test_it_has_in_stock_pivot_within_stock_information()
+    {
+
+    }
+
+    public function test_it_can_check_if_its_in_stock()
+    {
+
+    }
+
+    public function test_it_can_get_stock_count()
+    {
+        
+    }
 }
