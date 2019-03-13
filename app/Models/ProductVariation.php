@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Cart\Money;
+use App\Models\Stock;
 use App\Models\Product;
 use App\Models\Traits\HasPrice;
 use App\Models\ProductVariationType;
@@ -34,5 +35,10 @@ class ProductVariation extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
     }
 }
