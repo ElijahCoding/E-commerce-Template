@@ -27,9 +27,14 @@ class ProductVariation extends Model
         return $this->price->amount() !== $this->product->price->amount();
     }
 
+    public function inStock()
+    {
+        return $this->stockCount() > 0;
+    }
+
     public function stockCount()
     {
-
+        return $this->stock->first()->pivot->stock;
     }
 
     public function type()
