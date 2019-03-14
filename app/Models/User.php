@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ProductVariation;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,4 +56,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function cart()
+    {
+        return $this->belongsToMany(ProductVariation::class, 'cart_user')->withPivot('quantity');
+    }
 }
