@@ -12,4 +12,22 @@ class Cart
     {
         $this->user = $user;
     }
+
+    public function add($products)
+    {
+        $this->user->cart()->syncWithoutDetaching(
+           $this->getStorePayload($products)
+       );
+    }
+
+    protected function getStorePayload($products)
+    {
+        return collect($products)->keyBy('id')->map(function ($product) {
+            return [
+                'quantity' => $product['quantity']
+            ];
+        })
+            ->toArray();
+    }
+
 }
