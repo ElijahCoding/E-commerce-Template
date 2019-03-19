@@ -23,8 +23,8 @@ class CartController extends Controller
         $cart->add($request->products);
     }
 
-    public function update(CartUpdateRequest $request, ProductVariation $productVariation, Cart $cart)
+    public function update(ProductVariation $productVariation, CartUpdateRequest $request, Cart $cart)
     {
-
+        $cart->update($productVariation->id, $request->quantity);
     }
 }
