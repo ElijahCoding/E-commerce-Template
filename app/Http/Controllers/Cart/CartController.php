@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Cart;
 
 use App\Cart\Cart;
 use Illuminate\Http\Request;
+use App\Models\ProductVariation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\CartStoreRequest;
+use App\Http\Requests\Cart\CartUpdateRequest;
 
 class CartController extends Controller
 {
@@ -19,5 +21,10 @@ class CartController extends Controller
     public function store(CartStoreRequest $request, Cart $cart)
     {
         $cart->add($request->products);
+    }
+
+    public function update(CartUpdateRequest $request, ProductVariation $productVariation, Cart $cart)
+    {
+
     }
 }
