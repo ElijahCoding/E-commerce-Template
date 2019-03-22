@@ -3,6 +3,7 @@
 namespace App\Cart;
 
 use App\Models\User;
+use App\Cart\Money;
 
 class Cart
 {
@@ -41,6 +42,20 @@ class Cart
     {
         return $this->user->cart->sum('pivot.quantity') === 0;
     }
+
+    public function subtotal()
+    {
+        $subtotal = $this->user->cart->sum(function ($product) {
+            return $product->price->amount() * $product->pivot->quantity;
+        });
+
+        return new Money($subtotal);
+    }
+
+    // public function total()
+    // {
+    //
+    // }
 
     protected function getStorePayload($products)
     {
